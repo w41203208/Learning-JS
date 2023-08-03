@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="tating" content="General" />
+    <base target="_self" />
+    <meta name="description" content="" />
+    <title></title>
+    <meta name="author" content="Ming Zhe" />
+  </head>
+  <body>
+    <script type="inline-module" id="foo">
+      export default {
+        value: 'foo'
+      }
+      export class A {
+        num1 = 1;
+        num2 = 2;
+        puls = () => {
+          return this.num1 + this.num2;
+        };
+      }
+    </script>
+    <script src="inline_module_test2.js" setup></script>
+    <script type="module">
+      // const foo = await inlineImport('#foo');
+      import foo, { A } from 'foo';
+      console.log(foo);
+      const a = new A();
+      a[{}] = 12;
+      console.log(a.keys);
+    </script>
+  </body>
+</html>
