@@ -1,0 +1,136 @@
+
+/*-------------------------------------------------------------
+[Table of contents]
+
+1.Default CSS
+2.Base Widget
+3.Header 
+4.Sidebar
+5.Home page
+X.Footer
+--------------------------------------------------------------*/
+
+
+/*----- Default CSS -----*/
+
+//Vendor prefixes not added
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+$logo-color: #222533;
+$base-color: white;
+$text-color: #000000;
+$font-size: 13px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  line-height: normal;
+  font-size: $font-size + 3;
+  //overflow-y: auto;
+  -webkit-overflow-scrolling: touch; // ios
+
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased !important;
+  outline-color: $veget-color;
+}
+
+a,
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  outline-color: $veget-color;    
+}
+
+
+textarea, input, button {
+
+  outline-color: $veget-color;
+}
+
+.fit-items-col {
+  flex-grow: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.no-padding { padding: 0;}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active { // remove bootstrap outline
+  outline:0px !important;
+  -webkit-appearance:none;
+  box-shadow: none !important;
+}
+
+//a:active {color: rgb(139, 139, 139) !important;}
+
+ul {
+  padding-inline-start: 0;
+}
+
+ul ul {
+  list-style-type: none;
+}
+
+.sm-img {
+  height: 30px !important;
+  width: 30px !important;
+}
+
+::-moz-selection {
+  background: #5af;
+  color: #fff;
+  text-shadow: none;
+}
+::selection {
+  background: #5af;
+  color: #fff;
+  text-shadow: none;
+}
+
+.body-wrapper  {
+ //overflow: hidden;
+}
+
+/*----- End Default CSS -----*/
+
+
+/*-------- Animations --------*/
+@-webkit-keyframes flipInX {
+  0% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 50deg);
+    -webkit-transition-timing-function: ease-in;
+  }
+
+
+  80% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(400px);
+  }
+}
+/*-------- End Animations --------*/

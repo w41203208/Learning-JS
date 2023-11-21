@@ -1,0 +1,154 @@
+
+    <!-- Main Begin-->
+    <div>
+
+      <div class="row">
+
+        <div class="col-12">
+
+          <div class="control-bar">
+
+              <div class="row">
+
+
+                  <div class="col-12 col-lg col-md-12 texts">
+                      <div class="title">狀態列表</div>
+                  </div>
+
+                  <div class="search-col col-12 col-lg col-md-12">
+
+                      <div class = "Search_Filter justify-content-xl-end">
+
+                          <div class="search">
+
+                              <div class="search-input">
+
+                                  <div class="input-group">
+
+                                      <input type="text" v-model="searchInput" class="form-control" id="search-input" placeholder="輸入搜尋關鍵字..." value=""/>
+
+                                      <!-- <span class="input-group-btn">
+                                          <button class="btn btn-info btn-lg" type="submit" value="Submit">
+                                              <font-awesome-icon icon="upload" />
+                                          </button>
+                                      </span> -->
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+
+                      </div>
+                  </div>
+
+                  <div class="col-lg fit-items-col buttons">
+                      <button v-b-modal.addstate class="add-btn">新增 狀態</button>
+                  </div>
+
+              </div>
+
+              <!-- <div class="hint">推薦尺寸：800 × 600 px｜最多上限 8 張</div> -->
+
+          </div>
+
+          <div class="manage-table">
+              <b-table
+              responsive
+              :fields="fields"
+              :items="filtered"
+              :per-page="perPage"
+              :current-page="currentPage"
+              ref="table"
+              >
+              <template v-slot:cell(stateicon)="row">
+                <div class="image image-small-size">
+                    <img :src="row.item.stateicon" alt="">
+                </div>
+            </template>
+
+                  <template v-slot:cell(birth)="row">
+                      {{dateTranslator(row.item.birth)}}
+                  </template>
+
+                  <template v-slot:cell(contactName)="row">
+                      <div class="user-info-mid">
+                          {{row.item.contactName}}
+                      </div>
+                  </template>
+
+                  <template v-slot:cell(Action)="row">
+                      <a href="#"><button class="edit-btn">編輯</button></a>
+                      <button class="delete-btn" @click="removeAt(row.item)">刪除</button>
+                  </template>
+                  <!-- End Table slot template-->
+
+              </b-table>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="veget-pagination">
+          <b-pagination
+          v-model="currentPage"
+          :per-page="perPage"
+          aria-controls="user-table"
+          pills :total-rows="rows"
+          align="center"
+          first-number
+          last-number
+          ></b-pagination>
+      </div>
+
+      <!-- <Modal> -->
+
+
+
+      <!-- <TVfooter/> -->
+
+
+      <b-modal id="addstate" centered scrollable size="lg" title="First Modal">
+
+        <template #modal-header>
+          <h4>新增狀態</h4>
+        </template>
+        <template #default>
+          <div class="modal-merchant-home-body">
+            <form class="uploader-wrapper">
+                <div class="row uploader-body image-upload" style="align-items:center;">
+
+                    <div class="col-lg-10 col-12">
+                        <div class="uploader">
+                        <div class="drag-hint">拖曳圖片到此處</div>
+                        <img class="imageBrowser avatar" :src="currentMerchant.src"/>
+                        <input type="file" name="userprofile_picture" class="filePhoto" @change="uploadImage($event, '.imageBrowser.avatar')" required/>
+                        <button class="file-upload-btn" type="button"><font-awesome-icon icon="upload" /> 上傳</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row uploader-body tel">
+                    <div class="col-lg-2 col-12">
+                        <div class="uploader-title">新狀態名稱</div>
+                    </div>
+                </div>
+
+                <div class="row uploader-body tel" title="輸入">
+                    <div class="col-lg-10 col-12">
+                        <textarea tabindex="4" required></textarea>
+                    </div>
+              </div>
+            </form>
+          </div>
+        </template>
+
+        <template #modal-footer="{ok}">
+          <b-button size="sm" class="site-usual-btn" variant="success" @click="ok()">確定 </b-button>
+        </template>
+
+    </b-modal>
+
+    </div>
+    <!-- Main End-->

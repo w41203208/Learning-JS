@@ -1,0 +1,198 @@
+<!-- Main Begin-->
+<div>
+
+    <div class="page-title">
+        <span>帳號管理</span>
+        <div class="sub-title">查看管理人員及教師資訊內容。</div>
+    </div>
+				
+        
+    <div class="row">
+        <div class="col-12">
+
+            <div class="control-bar">
+
+                <div class="row">
+
+                    <div class="col-12 col-lg col-md-12 texts">
+                        <div class="title">人員列表</div>                                
+                    </div>
+
+                    <div class="search-col col-12 col-lg col-md-12">
+
+                        <div class = "Search_Filter justify-content-xl-end">
+
+                            <div class="dropdown">
+                                <el-select 
+                                v-model="selectedUserFilter" 
+                                value-key="value" placeholder="全部" 
+                                :no-data-text="'暫無資料'"
+                                default-first-option
+                                >                       
+                                    <el-option v-for="item in userFilter" :key="item.value" :label="item.label" :value="item">
+                                    {{ item.label }}
+                                    </el-option>
+                                </el-select>    
+                            </div>
+                
+                            <div class="search">
+                
+                                <div class="search-input">
+                
+                                    <div class="input-group">      
+                
+                                        <input type="text" v-model="searchInput" class="form-control" id="search-input" placeholder="輸入搜尋人員姓名..." value=""/>
+                
+                                        <!-- <span class="input-group-btn">
+                                            <button class="btn btn-info btn-lg" type="submit" value="Submit">
+                                                <font-awesome-icon icon="upload" />
+                                            </button>
+                                        </span> -->
+                
+                                    </div>
+                
+                                </div>   
+                
+                            </div>
+                
+                        </div> 	
+                    </div>
+
+                    <div class="col-lg fit-items-col buttons">
+                        <button v-b-modal.import class="clear-btn" title="匯入"><font-awesome-icon icon="file-import" /></button>    
+                        <button class="add-btn">新增 教師</button>         
+                    </div>
+
+                </div>
+
+                <!-- <div class="hint">推薦尺寸：800 × 600 px｜最多上限 8 張</div> -->
+                
+            </div>
+
+            <div class="manage-table">
+                <b-table
+                responsive
+                :fields="fields"
+                :items="filtered"
+                :per-page="perPage"
+                :current-page="currentPage"
+                ref="table"      
+                >
+                    <!-- Table slot template-->
+                    <template v-slot:cell(userType.name)="row">   
+                        <div class="text-tiny-width" >  
+                            {{row.item.userType.name}}                   
+                        </div>  
+                    </template>
+
+                    <template v-slot:cell(birth)="row">   
+                        {{dateTranslator(row.item.birth)}}
+                    </template>
+
+                    <template v-slot:cell(currentClass)="row">   
+                        <div class="multi-line-text-small-margin">   
+
+                            <div 
+                            class="text-extra-large-width"
+                            v-for="(item, index) in row.item.currentClass"
+                            >{{item}}</div>                               
+                    
+                        </div>  
+                    </template>
+
+                    <template v-slot:cell(historyClass)="row">   
+                        <div class="multi-line-text-small-margin">   
+                            
+                            <div 
+                            class="text-extra-large-width"
+                            v-for="(item, index) in row.item.historyClass"
+                            >{{item}}</div>                               
+                    
+                        </div>  
+                    </template>
+
+                    <template v-slot:cell(Action)="row">                                                     
+                        <a href="#"><button class="edit-btn">編輯</button></a>
+                        <button class="delete-btn" @click="removeAt(row.item)">刪除</button>                                         
+                    </template>
+                    <!-- End Table slot template-->
+
+                </b-table>
+            </div>
+                    
+        </div>
+
+    </div>
+
+    <div class="veget-pagination">
+        <b-pagination
+        v-model="currentPage"
+        :per-page="perPage"
+        aria-controls="user-table"
+        pills :total-rows="rows"
+        align="center"
+        first-number
+        last-number  
+        ></b-pagination>
+    </div>  
+
+    <!-- <TVfooter/> -->
+
+        <!--<匯入彈出視窗>-->
+
+        <b-modal id="import" centered scrollable size="lg">
+            <template #modal-header="{ close }">
+                <h5 class="modal-title"><b>匯入帳號資料</b></h5>
+            </template>
+            <template #default>
+                <section class="container import-section">
+                    <div class="import-desc">
+                        <p>請選擇要整批匯入的人員帳號及基本資料檔（檔案格式為.xlsx）</p>
+                        <p>1. 上傳前，請先下載範例檔，依規定格式建立資料後再上傳</p>
+                        <p>2. 上傳檔案格式為Excel檔，副檔名限.xlsx</p>
+                        <p>3. 上傳同檔名之檔案，將進行覆蓋</p>
+                        <p>4. 此功能僅限上傳管理人員及教師帳號相關資料</p>
+                    </div>
+               <div class="import-input step-one">
+                        <p>步驟一</p>
+                        <div class="step-div">
+                            <label class="step-select-btn stu-btn" >
+                                選擇檔案
+                                <input type="file" multiple class="step-select-file" @change="(e)=>fileInputHandleEvt(e)">
+                            </label>
+                            <div v-if="files.length > 0" class="step-file-view">
+                                <div v-for="file of files" :key="file.name" class="file-view-item">
+                                    <div class="img-icon">
+                                        <img src="../../assets/images/student/file.png" alt="">
+                                    </div>
+                                    {{ file.name }}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="step-upload-btn stu-btn" @click="uploadFileHandleEvt">上傳檔案</button>
+                    </div>
+                    <div class="step-two">
+                        <p>步驟二</p>
+                        <p class="step-two-p">檔案上傳後，請進行資料異常檢查!</p>
+                        <button class="stu-btn step-two-check-btn">資料異常檢查</button>
+                    </div>
+                    <div class="stu-notice-div">
+                        <p style="color:#CCC; font-weight: normal;">異常報告顯示區</p>
+                    </div>
+                    <div class="import-input step-three">
+                        <p>步驟三</p>
+                        <p class="step-three-desc">請檢查欲上傳資料是否正確，如確認完成即可以進行匯入</p>
+                        <button class="stu-btn step-three-check-btn">檢查檔案</button>
+                    </div>
+                </section>
+            </template>
+            
+            <template #modal-footer="{ ok }">
+                <b-button class="stu-btn btn-answer btn-cancel" @click="cancelClickHandleEvt">&emsp;取消&emsp;</b-button>
+                <b-button class="stu-btn btn-answer btn-ok" @click="ok()">&emsp;匯入&emsp;</b-button>
+            </template>
+        </b-modal>
+
+
+</div>
+<!-- Main End-->

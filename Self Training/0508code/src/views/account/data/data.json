@@ -1,0 +1,37 @@
+[
+    { 
+        "id": "NS001",
+        "division": {"type":0, "name":"安親"},
+        "name": "王明日老師", 
+        "gender": {"type": 1, "name":"女"},
+        "currentClass": ["國小－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["國小－MPM數學－三年級"],
+        "birth": "1999-11-22",
+        "phoneNumber": "0988845451",
+        "userType": {"type": 1, "name": "一般"}
+    },
+    { 
+        "id": 2222222,
+        "division": {"type":1, "name":"補習"},
+        "name": "王明日老師2", 
+        "gender": {"type": 0, "name":"男"},
+        "currentClass": ["國小－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["國小－MPM數學－三年級","國小－MPM數學－五年級"],
+        "birth": "1999-11-22",
+        "phoneNumber": "0988845451",
+        "userType": {"type": 1, "name": "一般"}
+    },
+    { 
+        "id": 3333333,
+        "division": {"type":0, "name":"安親"},
+        "name": "王明日主任", 
+        "gender": {"type": 1, "name":"女"},
+        "currentClass": ["國小－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["國小－MPM數學－三年級","國小－MPM數學－五年級"],
+        "birth": "1999-11-22",
+        "phoneNumber": "0988845451",
+        "userType": {"type": 0, "name": "管理者"}
+    }
+    
+
+]

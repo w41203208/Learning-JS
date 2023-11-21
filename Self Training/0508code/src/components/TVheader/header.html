@@ -1,0 +1,31 @@
+<!-- Header Begin -->
+<header class="dash-header">
+
+    <div class="logo-container">
+        <a class="rad-toggle-btn" v-on:click="toggle_menu()"><font-awesome-icon icon="bars" /></a>
+        <router-link tag="a"class="rad-logo" to="/student"><img src="../../assets/images/logo.png" alt=""></router-link> 
+    </div>
+
+    <div class="top-nav-container">		
+
+        <b-dropdown id="dropdown-profile" text="" class="m-md-2">
+            <template slot="button-content">           
+                <span class="img-box"><img class="rad-list-img sm-img" src="https://lh4.googleusercontent.com/-GXmmnYTuWkg/AAAAAAAAAAI/AAAAAAAAAAA/oK6DEDS7grM/w56-h56/photo.jpg" alt="me" /></span>
+                <span class="user-name">Hi, Sean peng</span>   
+            </template>
+            <b-dropdown-item>我的資訊</b-dropdown-item>
+            <b-dropdown-item>所有通知</b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-item>登出</b-dropdown-item>
+            <b-dropdown-item href="../index.html">離開素時中心</b-dropdown-item>
+        </b-dropdown>
+      
+        <div class="links">	
+            <a class="leave-link" href="../index.html"><font-awesome-icon icon="sign-out-alt" /> 登出</a>
+            
+        </div>
+                
+    </div>
+    
+</header>	
+<!-- Header End -->

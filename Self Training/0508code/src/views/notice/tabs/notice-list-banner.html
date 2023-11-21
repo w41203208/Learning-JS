@@ -1,0 +1,279 @@
+
+    <!-- Main Begin-->
+    <div class="rest-setting-home">
+  
+      <div class="control-bar">
+  
+        <div class="row">
+  
+            <div class="col-12 col-lg col-md-12 texts">
+                <div class="title">輪播管理</div>                                
+            </div>
+  
+            <div class="search-col col-12 col-lg col-md-12">
+  
+                <div class = "Search_Filter justify-content-xl-end">
+     
+                  <div class="search">
+      
+                      <div class="search-input">
+      
+                          <div class="input-group">      
+      
+                              <input type="text" v-model="searchInput" class="form-control" id="search-input" placeholder="輸入搜尋關鍵字..." value=""/>
+      
+                              <!-- <span class="input-group-btn">
+                                  <button class="btn btn-info btn-lg" type="submit" value="Submit">
+                                      <font-awesome-icon icon="upload" />
+                                  </button>
+                              </span> -->
+      
+                          </div>
+      
+                      </div>   
+      
+                  </div>
+        
+                </div> 	
+            </div>
+  
+            <div class="col-lg fit-items-col buttons">
+                <button v-b-modal.import class="add-btn">新增 公告輪播</button>         
+            </div>
+  
+        </div>
+  
+        <!-- <div class="hint">推薦尺寸：800 × 600 px｜最多上限 8 張</div> -->
+      
+      </div>				
+      
+      <div class="row">
+      
+          <div class="col-lg-12 col-12">
+  
+              <div class="manage-table">
+                  <b-table
+                  responsive
+                  :fields="fields"
+                  :items="filtered"
+                  :per-page="perPage"
+                  :current-page="currentPage"
+                  ref="table"      
+                  >
+                      <!-- Table slot template-->
+  
+                      <template v-slot:cell(bgSrc)="row">                     
+                          <div class="image image-mid-size">
+                              <img :src="row.item.bgSrc" alt="">
+                          </div>
+                      </template>
+                      <template v-slot:cell(link)="row">                     
+                          <div class="">
+                              <a href="row.item.link" alt="">{{(row.item.link)}}</a>
+                          </div>
+                      </template>
+ 
+                      <template v-slot:cell(data)="row"> 
+                        <div class="data">
+                          <div>瀏覽數: {{formatPrice(row.item.viewers)}}</div>
+                        </div>
+                      </template>
+  
+                     
+                        <template v-slot:cell(Action)="row">
+                            <a href="#"><button v-b-modal.edit class="edit-btn">編輯</button></a>
+                            <button class="delete-btn" @click="removeAt(row.item)">刪除</button>
+                        </template>                                                             
+         
+                      <!-- End Table slot template-->
+  
+                  </b-table>
+              </div>
+                      
+          </div>
+  
+      </div>
+  
+      <div class="veget-pagination">
+          <b-pagination
+          v-model="currentPage"
+          :per-page="perPage"
+          aria-controls="notice-table"
+          pills :total-rows="rows"
+          align="center"
+          first-number
+          last-number  
+          ></b-pagination>
+      </div>  
+   <!-- <TVfooter/> -->
+   <!--<開新輪播>-->
+
+     <b-modal id="import" scrollable size="lg" title="First Modal">
+  
+        <template #modal-header>
+          <h5><b>新增輪播</b></h5>
+        </template>
+    
+        <template #default>
+          <div class="modal-merchant-home-body">
+            <form class="uploader-wrapper">
+    
+              <div class="row uploader-body title">
+                <div class="col-lg-2 col-12">
+                    <div class="uploader-title"><b>輪播號碼</b><Required style="color:red; font-weight:normal">*</Required></div>
+                </div>
+                <div class="col-lg-10 col-12">
+                    <label style="font-weight:100; color :#5A5A5A">001</label>
+                </div>
+              </div>
+
+              <div class="row uploader-body content">
+                <div class="col-lg-2 col-12">
+                    <div class="uploader-title required"><b>內容</b></div>
+                    <div class="uploader-tip"><br>圖片建議：尺寸 600 × 300 px 透明 PNG 或 JPEG 最大 20 MB</div>
+                </div>
+                <div class="col-lg-10 col-12">
+  
+                    <div class="uploader" style="max-height:270px; max-width:300px;">
+                      <div class="drag-hint">拖曳圖片到此處</div>		
+                      <img class="imageBrowser" :src="currentMerchant.src"/>
+                      <input type="file" name="userprofile_picture" class="filePhoto" @change="uploadImage($event, '.imageBrowser')" required/>
+                      <button class="file-upload-btn" type="button"><font-awesome-icon icon="upload" /> 上傳圖檔</button>
+                    </div>
+  
+                </div> 
+              </div>
+    
+              <div class="row uploader-body content"  style="margin-bottom: 0px !important;">
+                <div class="col-lg-2 col-12">
+                    <div class="uploader-title"><b>發布時間</b><Required style="color:red; font-weight:normal">*</Required></div>
+                </div>
+                <div class="col-lg-10 col-12">
+                  <div class="uploader-title">
+                    <input id="rad1" type="radio"></input><label style="padding-left:8px ;"><b>立即發布</b></label>
+                    <div class="edit">
+                      <input id="rad2" type="radio"></input><label style="padding-left:8px; padding-top: 5px ;font-size: 14px;"><b>擇日發布</b></label>
+                      <input class="edit-div" type="date" placeholder="日期" value="2022-01-01"></input> 
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row uploader-body content" style="margin-bottom: 0px !important;">
+                <div class="col-lg-2 col-12">
+                    <div class="uploader-title required"><b>連結</b></div>
+                </div>
+                <div class="col-lg-10 col-12">
+                    <textarea  style="border:1px #CCC solid;" rows="1" placeholder="請輸入公告連結"></textarea>
+                    <textarea  style="border:1px #CCC solid;" rows="1" placeholder="請輸入公告連結"></textarea>
+                </div>
+              </div>
+    
+
+    
+            </form>
+          </div>
+        </template>
+    
+        <template #modal-footer="{ok, cancel}">
+          <!-- Emulate built in modal footer ok and cancel button actions -->
+          <b-button size="sm" class="site-usual-btn2" variant="light" @click="cancel()">
+            取消
+          </b-button>
+    
+          <b-button size="sm" class="site-usual-btn" variant="success" @click="ok()">
+            確認發布
+          </b-button>
+    
+        </template>
+    
+      </b-modal>
+<!--<新增輪播-結束>-->
+  
+<!--<編輯輪播>-->
+
+   <b-modal id="edit" scrollable size="lg" title="First Modal">
+  
+    <template #modal-header>
+      <h5><b>編輯輪播</b></h5>
+    </template>
+
+    <template #default>
+      <div class="modal-merchant-home-body">
+        <form class="uploader-wrapper">
+
+          <div class="row uploader-body title">
+            <div class="col-lg-2 col-12">
+                <div class="uploader-title"><b>輪播號碼</b><Required style="color:red; font-weight:normal">*</Required></div>
+            </div>
+            <div class="col-lg-10 col-12">
+                <label style="font-weight:100; color :#5A5A5A">001</label>
+            </div>
+          </div>
+
+          <div class="row uploader-body content">
+            <div class="col-lg-2 col-12">
+                <div class="uploader-title required"><b>內容</b></div>
+                <div class="uploader-tip"><br>圖片建議：尺寸 600 × 300 px 透明 PNG 或 JPEG 最大 20 MB</div>
+            </div>
+            <div class="col-lg-10 col-12">
+
+                <div class="uploader" style="max-height:270px; max-width:300px;">
+                  <div class="drag-hint">拖曳圖片到此處</div>		
+                  <img class="imageBrowser" :src="currentMerchant.src"/>
+                  <input type="file" name="userprofile_picture" class="filePhoto" @change="uploadImage($event, '.imageBrowser')" required/>
+                  <button class="file-upload-btn" type="button"><font-awesome-icon icon="upload" /> 上傳圖檔</button>
+                </div>
+
+            </div> 
+          </div>
+
+          <div class="row uploader-body content"  style="margin-bottom: 0px !important;">
+            <div class="col-lg-2 col-12">
+                <div class="uploader-title"><b>發布時間</b><Required style="color:red; font-weight:normal">*</Required></div>
+            </div>
+            <div class="col-lg-10 col-12">
+              <div class="uploader-title">
+                <input id="rad1" type="radio"></input><label style="padding-left:8px ;"><b>立即發布</b></label>
+                <div class="edit">
+                  <input id="rad2" type="radio"></input><label style="padding-left:8px; padding-top: 5px ;font-size: 14px;"><b>擇日發布</b></label>
+                  <input class="edit-div" type="date" placeholder="日期" value="2022-01-01"></input> 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row uploader-body content" style="margin-bottom: 0px !important;">
+            <div class="col-lg-2 col-12">
+                <div class="uploader-title required"><b>連結</b></div>
+            </div>
+            <div class="col-lg-10 col-12">
+                <textarea  style="border:1px #CCC solid;" rows="1" placeholder="請輸入公告連結"></textarea>
+                <textarea  style="border:1px #CCC solid;" rows="1" placeholder="請輸入公告連結"></textarea>
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+    </template>
+
+    <template #modal-footer="{ok, cancel}">
+      <!-- Emulate built in modal footer ok and cancel button actions -->
+      <b-button size="sm" class="site-usual-btn2" variant="light" @click="cancel()">
+        取消
+      </b-button>
+
+      <b-button size="sm" class="site-usual-btn" variant="success" @click="ok()">
+        確認發布
+      </b-button>
+
+    </template>
+
+  </b-modal>
+<!--<編輯輪播-結束>-->
+  
+    </div>
+    <!-- Main End-->
+ 

@@ -1,0 +1,270 @@
+
+    <!-- Main Begin-->
+    <div>
+
+      <div class="row">
+
+        <div class="col-12">
+
+          <div class="control-bar">
+
+              <div class="row">
+
+                  <div class="col-12 col-lg col-md-12 texts">
+                      <div class="title">課程列表</div>
+                  </div>
+
+                  <div class="search-col col-12 col-lg col-md-12">
+
+                      <div class = "Search_Filter justify-content-xl-end">
+
+                          <div class="dropdown">
+                              <el-select
+                              v-model="selectedUserFilter"
+                              value-key="value" placeholder="全部"
+                              :no-data-text="'暫無資料'"
+                              default-first-option
+                              >
+                                  <el-option v-for="item in userFilter" :key="item.value" :label="item.label" :value="item">
+                                  {{ item.label }}
+                                  </el-option>
+                              </el-select>
+                          </div>
+
+                          <div class="search">
+
+                              <div class="search-input">
+
+                                  <div class="input-group">
+
+                                      <input type="text" v-model="searchInput" class="form-control" id="search-input" placeholder="輸入搜尋關鍵字..." value=""/>
+
+                                      <!-- <span class="input-group-btn">
+                                          <button class="btn btn-info btn-lg" type="submit" value="Submit">
+                                              <font-awesome-icon icon="upload" />
+                                          </button>
+                                      </span> -->
+
+                                  </div>
+
+                              </div>
+
+                          </div>
+
+                      </div>
+                  </div>
+
+                  <div class="col-lg fit-items-col buttons">
+                      <button v-b-modal.import class="clear-btn" title="匯入"><font-awesome-icon icon="file-import" /></button>
+                      <button v-b-modal.add class="add-btn">新增 課程</button>
+                  </div>
+
+              </div>
+
+              <!-- <div class="hint">推薦尺寸：800 × 600 px｜最多上限 8 張</div> -->
+
+          </div>
+
+          <div class="manage-table">
+              <b-table
+              responsive
+              :fields="fields"
+              :items="filtered"
+              :per-page="perPage"
+              :current-page="currentPage"
+              ref="table"
+              >
+                  <!-- Table slot template-->
+                  <template v-slot:cell(Default)="row">
+                    <a href="#"><button class="view edit-btn" v-b-modal.stuts-list-editAndLook style="background-color:#309398 ;">查看/編輯</button></a>
+
+                </template>
+
+                  <template v-slot:cell(Action)="row">
+                      <a href="#"><button v-b-modal.stuts-list-edit class="edit-btn">編輯</button></a>
+                      <button class="delete-btn" @click="removeAt(row.item)">刪除</button>
+                  </template>
+                  <!-- End Table slot template-->
+
+              </b-table>
+          </div>
+
+        </div>
+
+
+
+
+      </div>
+
+      <div class="veget-pagination">
+          <b-pagination
+          v-model="currentPage"
+          :per-page="perPage"
+          aria-controls="user-table"
+          pills :total-rows="rows"
+          align="center"
+          first-number
+          last-number
+          ></b-pagination>
+      </div>
+
+      <!-- <TVfooter/> -->
+    <!--<匯入彈出視窗>-->
+
+    <b-modal id="import" centered scrollable size="lg">
+        <template #modal-header="{ close }">
+            <h5 class="modal-title"><b>匯入課程資料</b></h5>
+        </template>
+        <template #default>
+            <section class="container import-section">
+                <div class="import-desc">
+                    <p>請選擇要整批匯入的課程資料檔（檔案格式為.xlsx）</p>
+                    <p>1. 上傳前，請先下載範例檔，依規定格式建立資料後再上傳</p>
+                    <p>2. 上傳檔案格式為Excel檔，副檔名限.xlsx</p>
+                    <p>3. 上傳同檔名之檔案，將進行覆蓋</p>
+                    <p>4. 此功能僅限上傳課程相關資料</p>
+                </div>
+                <div class="import-input step-one">
+                    <p>步驟一</p>
+                    <div class="step-div">
+                        <label class="step-select-btn stu-btn" >
+                            選擇檔案
+                            <input type="file" multiple class="step-select-file" @change="(e)=>fileInputHandleEvt(e)">
+                        </label>
+                        <div v-if="files.length > 0" class="step-file-view">
+                            <div v-for="file of files" :key="file.name" class="file-view-item">
+                                <div class="img-icon">
+                                    <img src="../../../assets/images/student/file.png" alt="">
+                                </div>
+                                {{ file.name }}
+                            </div>
+                        </div>
+                    </div>
+                    <button class="step-upload-btn stu-btn" @click="uploadFileHandleEvt">上傳檔案</button>
+                </div>
+                <div class="step-two">
+                    <p>步驟二</p>
+                    <p class="step-two-p">檔案上傳後，請進行資料異常檢查!</p>
+                    <button class="stu-btn step-two-check-btn">資料異常檢查</button>
+                </div>
+                <div class="stu-notice-div">
+                    <p style="color:#CCC; font-weight: normal;">異常報告顯示區</p>
+                </div>
+                <div class="import-input step-three">
+                    <p>步驟三</p>
+                    <p class="step-three-desc">請檢查欲上傳資料是否正確，如確認完成即可以進行匯入</p>
+                    <button class="stu-btn step-three-check-btn">檢查檔案</button>
+                </div>
+            </section>
+        </template>
+        <template #modal-footer="{ ok }">
+            <b-button class="stu-btn btn-answer btn-cancel" @click="cancelClickHandleEvt">&emsp;取消&emsp;</b-button>
+            <b-button class="stu-btn btn-answer btn-ok" @click="ok()">&emsp;匯入&emsp;</b-button>
+        </template>
+    </b-modal>
+    <!--<新增學生彈出視窗>-->
+
+    <b-modal id="add" centered scrollable size="lg" >
+        <template #modal-header="{ close }">
+            <h5 class="modal-title"><b>新增課程</b></h5>
+        </template>
+        <template #default>
+            <section class="container stu-section">
+                <div class="add">
+                    <p>課程編號<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請輸入課程編號" required>
+                </input>
+                </div>
+                <div class="add">
+                    <p>課程類別<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請輸入課程類別" required></input>
+                </div>
+                <!--課程選擇0516-->
+                <div class="add">
+                    <p>國小/國中/高中<Required style="color:red;font-weight:normal">*</Required></p>
+                    <select class="add-div-sel-opt">
+                        <option>國小</option>
+                        <option>國中</option>
+                        <option>高中</option>
+                    </select>
+                </div>
+                <div class="add">
+                    <p>年級<Required style="color:red;font-weight:normal">*</Required></p>
+                    <select class="add-div-sel-opt">
+                        <option>一年級</option>
+                        <option>二年級</option>
+                        <option>三年級</option>
+                        <option>四年級</option>
+                        <option>五年級</option>
+                        <option>六年級</option>
+                    </select>
+                </div>
+                <div class="add">
+                    <p>課程名稱<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請輸入課程名稱" required ></input>
+                </div>
+                <div class="add">
+                    <p>課程日期<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="date" placeholder="請選擇課程日期" value="2022-01-01"required ></input>
+                </div>
+                <div class="add">
+                    <p>課程週期<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請選擇課程週期" required></input>
+                </div>
+                <div class="add">
+                    <p>課程時間<Required style="color:red; font-weight:normal">*</Required></p>
+                    <input class="add-div" type="time"placeholder="請輸入課程時間" required></input>
+                </div>
+                <div class="add">
+                    <p>上課人數<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請輸入上課人數" required ></input>
+                </div>
+                <div class="add">
+                    <p>授課教師<Required style="color:red;font-weight:normal">*</Required></p>
+                    <input class="add-div" type="text" placeholder="請輸入授課教師姓名" required ></input>
+                </div>
+                <div class="add">
+                    <p>助理教師</p>
+                    <input class="add-div" type="text" placeholder="請輸入助理教師姓名" required ></input>
+                </div>
+            </section>
+        </template>
+        <template #modal-footer="{ cancel, ok }">
+            <b-button class="stu-btn btn-answer btn-cancel" @click="cancel()">&emsp;取消&emsp;</b-button>
+            <b-button class="stu-btn btn-answer btn-ok" @click="ok()">&emsp;確認&emsp;</b-button>
+        </template>
+    </b-modal>
+    <b-Modal id="stuts-list-edit" centered size="lg">
+        <template #modal-header>
+          <h5 class="modal-title title-expand">請編輯所選狀態</h5>
+        </template>
+        <template #default>
+          <div class="modal-content">
+            <MStatus></MStatus>
+          </div>
+        </template>
+        <template #modal-footer>
+          <div></div>
+        </template>
+    </b-Modal>
+    <b-Modal id="stuts-list-editAndLook" centered size="lg">
+        <template #modal-header>
+          <h5 class="modal-title title-expand">請編輯所選狀態</h5>
+        </template>
+        <template #default>
+          <div class="modal-content">
+            <MStatusLook></MStatusLook>
+          </div>
+        </template>
+        <template #modal-footer>
+          <div></div>
+        </template>
+    </b-Modal>
+
+
+    </div>
+
+    <!-- Main End-->
+
+
+

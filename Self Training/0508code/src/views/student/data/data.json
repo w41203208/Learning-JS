@@ -1,0 +1,37 @@
+[
+    { 
+        "id": "AS0065",
+        "name": "陳奕昀", 
+        "educationalStage": { "stage": "國小", "grade": "四年級"},
+        "currentClass": ["國小－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["國小－MPM數學－三年級"],
+        "birth": "1999/11/22",
+        "contactName": "王權益(父)",
+        "phoneNumber": "0988845451",
+        "userType": "elementary"
+
+    },
+    { 
+        "id": 2222222,
+        "name": "王明日王", 
+        "educationalStage": { "stage": "國中", "grade": "三年級"},
+        "currentClass": ["國中－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["國中－MPM數學－三年級","國小－MPM數學－五年級"],
+        "birth": "1999-11-22",
+        "contactName": "王權益2(父)",
+        "phoneNumber": "0988845451",
+        "EducationalStage": "junior"
+    },
+    { 
+        "id": 3333333,
+        "name": "王明日3", 
+        "educationalStage": { "stage": "高中", "grade": "一年級"},
+        "currentClass": ["高中－課後補習－拉普斯美語文","國小－課後安親－三年級"],
+        "historyClass": ["高中－MPM數學－三年級","國小－MPM數學－五年級"],
+        "birth": "1999-11-22",
+        "contactName": "王權益王(父)",
+        "phoneNumber": "0988845451",
+        "EducationalStage": "senior"
+    }
+
+]

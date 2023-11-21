@@ -1,0 +1,43 @@
+[
+    { 
+        "id": "001", 
+        "coursecategory": "課後安清", 
+        "educationalStage":"國小",
+        "grade": "三年級",
+        "coursetitle": "拉普斯美語文",
+        "date":"111/1/25-111/3/20",
+        "cycle": "四",
+        "time": "10:00-12:00",
+        "headcount": 75,
+        "teacher": "王大明",
+        "assistant": "許明美"
+
+    },
+    { 
+        "id": "002", 
+        "coursecategory": "課後安清", 
+        "educationalStage": "國小",
+        "grade": "三年級",
+        "coursetitle": "拉普斯美語文",
+        "date":"111/1/25-111/3/20",
+        "cycle": "四",
+        "time": "10:00-12:00",
+        "headcount": 75,
+        "teacher": "王大明",
+        "assistant": "許明美"
+    },
+    { 
+        "id": "003", 
+        "coursecategory": "課後安清", 
+        "educationalStage":"國小",
+        "grade": "三年級",
+        "coursetitle": "拉普斯美語文",
+        "date":"111/1/25-111/3/20",
+        "cycle": "四",
+        "time": "10:00-12:00",
+        "headcount": 75,
+        "teacher": "王大明",
+        "assistant": "許明美"
+    }
+
+]

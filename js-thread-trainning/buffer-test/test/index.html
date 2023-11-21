@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="button">test</button>
+    <script>
+      // Synchronous
+      [1, 2, 3, 4].forEach(function (i) {
+        console.log(i);
+      });
+
+      // Asynchronous
+      function asyncForEach(array, cb) {
+        array.forEach(function (i) {
+          setTimeout(() => {
+            cb(i);
+          }, 1000);
+        });
+      }
+
+      asyncForEach([1, 2, 3, 4], function (i) {
+        console.log(i);
+      });
+    </script>
+
+    <!-- <script src="main.js"></script> -->
+  </body>
+</html>

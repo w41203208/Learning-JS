@@ -1,0 +1,146 @@
+/*-------------------- Header ----------------------*/
+.dash-header {
+  display: flex;
+  width: 100vw;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: $base-color;
+  z-index: 1039;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+
+  svg { 
+    fill: $primary-color;
+    &:hover {
+      fill: $normal-color;
+    }
+  }
+  
+  .logo-container {
+    display: flex;
+    width: 290px;
+    align-items: center;
+    height: 50px;
+    float: left;
+    user-select: none;
+    transition: all 0.2s ease-in-out;
+
+    .rad-toggle-btn,
+    .rad-logo {
+        text-decoration: none;
+        position: relative;
+        //height: 50px;
+        font-size: 22px;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+        color: $heading-icon-color2;
+        
+    }
+
+    .rad-toggle-btn { margin-left: 15px; margin-right: 15px;}
+   
+    .rad-logo {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+
+      transition: all 0.2s ease-in-out;
+      img {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  
+  .top-nav-container {
+    display: flex !important;
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    transition: all 0.2s ease-in-out;
+
+     
+    .dropdown {
+
+      outline: none;  
+    }
+
+    #dropdown-notice
+    {
+      .menu-badge {
+        position: absolute;    
+        display: inline-block;
+        top: 4px;
+        right: -1px;
+        min-width: 10px;
+        min-height: 10px;     
+        color: $base-color;
+        background: #e94b3b;     
+        border-radius: 100%;
+        box-shadow: 0.5px 0.2px 1px rgba(#000, 0.5);
+        z-index: 1;
+      }
+      button {
+        padding: 5px;
+        color: black;
+       
+        background-color: white;
+        border: none;
+        &::after {
+          display: none;
+        }
+      }
+    }
+
+    #dropdown-profile {
+      button {
+        background-color: white;
+        border: none;
+        &::after {
+          vertical-align: initial;
+          color: $primary-color;
+        }
+      }
+
+      .img-box {
+        margin-right: 10px;
+        overflow:hidden; 
+        img {
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+      .user-name {
+        color: black;
+        margin-right: 5px;
+      }
+    }
+   
+    .links {
+      display: flex;
+      align-items: center;
+
+      margin-right: 10px;
+      position: relative;
+
+      .leave-link {
+        margin-right: 10px;
+        padding: 0 5px;
+        position: relative;
+        color: $heading-icon-color2;
+        &:hover { color: #000; }
+      }  
+    }
+
+  }
+}
+  
+/*-------------------- Header End ----------------------*/

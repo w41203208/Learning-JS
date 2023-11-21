@@ -1,0 +1,676 @@
+/************ Base-widget *************/
+
+/*--------- Sign Wedgit ----------*/
+.dollar-sign::before {
+    content: "$";
+    font-size: inherit;
+}  
+
+.required::after {
+  content: "*";
+  font-size: inherit;
+  color: #F0353C;
+} 
+/*--------- End Sign Wedgit ----------*/
+
+
+/*------------ Buttons -----------*/
+.site-usual-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(0,192,164,1);
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 5.5px 13.3px;
+  transition: all ease-in-out .3s;
+  &:hover {
+    background-color: $veget-color-hover;
+  }
+}
+  
+.site-usual-btn2 {	
+  font-size: 14px;
+  font-weight: 600;
+  color:rgba(112, 112, 112, 1);
+  background-color: #ffffff00;
+  border-style:solid;
+  border-radius: 6px;
+  border-color:rgba(112, 112, 112, 0.534);
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 4.5px 12px;
+}
+
+.edit-usual-btn {
+  margin: 0 5px 5px 0;
+  padding: 3px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background: $veget-color;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.edit-btn {
+    margin: 0 5px 5px 0;
+    padding: 3px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #FA914F;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.edit-btn2 {
+  background: none;                
+  border: none;
+  svg {
+    fill: $veget-color;
+  }
+  &:hover {
+    svg {
+      fill: $veget-color-hover;                
+    }
+  }                           
+}
+
+.delete-btn {
+    margin-bottom: 0 5px 5px 0;
+    padding: 3px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #CF2F2F;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.add-btn {
+
+  margin-bottom: 0 5px 5px 0;
+  padding: 7px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: $white-color;
+  background: $sub-veget-color;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+
+  &::before {
+    font-family: 'FontAwesome5';
+    content: '\f067';
+    margin-right: 10px;
+  }
+
+}
+
+.delete-btn2 {
+
+  margin-bottom: 0 5px 5px 0;
+  padding: 6px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #F0353C;
+  background: #FFDFE0;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+  .icon {
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+
+}
+
+.clear-btn { // btn no background color
+  color: $primary-color;
+  background: none;
+  border: none;
+}
+/*------------ End Buttons -----------*/
+
+/*------------ control bar -----------------*/
+
+/*------------ End control bar -------------*/
+
+/*-------------- image boxes ------------*/
+.image {
+  order: -1;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img { 
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+/*-------------- End image boxes ------------*/
+
+/*----------- main part ----------*/
+.dash-main-section {
+  margin-top: 75px; 
+  height: calc(var(--vh, 1vh) * 100 - 75px);
+}
+
+.dash-main-wrapper {
+  margin: 0 30px;
+  margin-top: 20px;
+  padding-bottom: 40px;
+  position: absolute;
+  left: 290px;
+  //top: 75px;
+  width: auto;
+  right: 0;
+  transition: all 0.3s ease-in-out;
+  
+  &.sidebar-min {
+    left: 0;
+  }
+}
+/*----------- End main part ----------*/
+
+/*------- page titles -------*/
+.page-title {
+
+  padding-bottom: 10px;
+  width: 100%;
+  background-color: white;
+  border-bottom: 2px solid $border;
+  z-index: 1037;
+  transition: all ease-in-out 0.3s;
+
+  span {
+    font-size: 33px;
+    font-weight: 500;
+    display: block;
+    transition: all ease-in-out 0.3s;
+  }
+
+  .sub-title {
+    color: $primary-color;
+    transition: all ease-in-out 0.3s;
+  }
+
+  &.sticky {
+
+    padding: 10px 0;
+    position: sticky;
+    position: -webkit-sticky; // ios
+    top: 75px;
+    right: 2%;
+    box-shadow: 0 4px 4px -4px rgba(#000, 0.1);
+    transition: all ease-in-out 0.3s;
+
+    span {
+      font-size: 25px;
+    }
+
+    .sub-title {
+      font-size: 14px;
+      color: $primary-color;
+    }
+
+  }
+  
+}
+/*------- End page titles -------*/
+
+/*------- page tab -------*/
+.multi-route-page { // tab btn in page
+  margin-bottom: 0;
+
+  &.page-title {
+    padding: 0;
+  }
+
+  .multi-route {
+    margin-bottom: 0;
+    li {
+
+      padding: 10px 30px;
+      height: 40px;
+      display: inline-block;
+      vertical-align: text-bottom;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 3px;
+      transition: all ease-in-out .3s;
+      border-bottom: 3px solid rgba(0, 0, 0, 0);
+      .offset {
+        font-size: 16px;
+        margin: 0 16px;
+      }
+  
+      &:hover{
+        background: $background;
+        border-bottom: 3px solid $border-bottom;
+      }
+  
+      &.active, &.active:hover {
+        background: $sub-veget-background-color;
+        border-bottom: 3px solid $sub-veget-border-bottom;
+     
+      }
+    }
+  }
+  .multi-route-page-selector {
+    margin-top: 40px;
+  }
+
+  &.sticky {
+    .multi-route-page-selector {
+      margin-top: 20px;
+    }
+    li {
+        font-size: 14px;
+    }
+  }
+  
+}
+/*------- End page tab -------*/
+
+/*---- part title ----*/
+.part-title {
+  
+  span {
+    font-size: 20px;
+    display: block;
+  }
+
+  a {
+    margin-left: 10px;
+    font-size: 14px;
+    color: $veget-color;
+    &:hover {
+      color: $veget-color-hover;
+    }
+  }
+}
+/*---- End part title ----*/
+
+
+/*---------- uploader wrapper ----------*/
+.uploader-wrapper {
+
+  max-width: 750px;
+
+  .uploader-body {
+    margin-bottom: 33px;
+
+    ::placeholder { 
+      font-size: 14px;
+      color: $primary-color;
+    }
+
+     
+    .uploader {
+      position:relative; 
+      overflow:hidden; 
+      width:100%; 
+      height:250px; 
+      //background:#f3f3f3; 
+      border-radius: 3px;
+      border:2px solid $border-bottom;
+
+      .drag-hint {
+        position: relative;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: $border-bottom;
+        user-select: none;
+        z-index:1;
+        top: 43%;
+
+        &.hide {
+          opacity: 0;
+        }
+      }
+
+      .filePhoto {
+        position:absolute;
+        width:100%;
+        height:250px;
+        top:0;
+        left:0;
+        z-index:3;
+        opacity:0;
+        cursor:pointer;
+      }
+
+      img{
+        position:absolute;
+        width:90.2%;
+        height: 178px;
+        top:9%;
+        left:5%;
+        z-index:2;
+        border:none;
+        border-radius: 3px;
+        object-fit: cover;
+      }
+
+      img[src=""], img:not([src]){
+        opacity:0;
+      } 
+
+      .file-upload-btn { 
+        position: absolute;
+        bottom: 7px;
+        right: 0px;
+        font-size: 12px;
+        color: $sub-veget-color2;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background: none;
+        z-index: 3;
+
+        &:hover {
+          text-decoration: underline;
+        }
+        
+        svg {
+          fill:$sub-veget-color2;
+          width: 14px;
+        }
+      }
+
+    }
+
+    .multi-uploader {
+      position: relative;
+      overflow: hidden;
+      overflow-y: auto;
+      width: 100%;
+      height: 250px;
+      border-radius: 3px;
+      border: 2px solid rgba(173, 173, 173, 0.534);
+      //overscroll-behavior: contain;
+      //-webkit-overflow-scrolling: touch; 
+      .container {
+        padding: 25px;
+        background: none;
+        border: none;
+        .beforeUpload {
+          height: 100%;
+          input {        
+          }
+        }
+        .mainMessage {
+          margin: 0;
+          position: relative;
+          top: 43%;
+          font-size: 20px;
+          font-weight: bold;
+          color: $border-bottom;
+          
+        }
+      }
+    }
+
+    .uploader-title { font-size: 14px;}
+
+    .uploader-tip { 
+      font-size: 12px;
+      color: #CF2F2F;
+    }
+
+    textarea, .textInput { 
+      padding: 3px 5px;
+      width: 100%;
+      height: 32px;
+      border: 2px solid $border-bottom;
+      border-radius: 3px;
+      resize: none;
+    }
+
+    .intro-textarea {
+      height: 65px;
+    }
+
+    .type-limit {
+      text-align: right;
+      font-size: 12px;
+      color: $primary-color;
+    }
+
+    .date {
+
+      input {    
+
+        min-height: 2rem;    
+        min-width: 100%;
+        //color: $primary-color;
+        border: 2px solid $border-bottom; 
+        border-radius: 3px; 
+      }
+      
+    }
+
+    button {
+      margin-right: 10px;     
+    }
+
+    .cancel-btn {
+      font-size: 14px;
+      font-weight: 600;
+      color:rgba(112, 112, 112, 1);
+      background-color: #ffffff00;
+      border: 2px solid;
+      border-radius: 6px;
+      border-color:rgba(112, 112, 112, 0.534);
+      text-transform: uppercase;
+      display: inline-block;
+      padding: 4.5px 12px;
+      span {
+        margin: 0 13px;
+      }
+    }
+
+  }
+
+}
+
+/*---------- End uploader wrapper ----------*/
+
+/*-------------- Control bar ---------------*/
+.control-bar {
+  position: relative;
+  margin: 20px 0 25px 0;
+  align-items: center;
+  $input-height: 36px;
+
+  //.row {align-items: center;}
+
+  .texts {
+    margin-bottom: 20px;
+    min-width: 150px;
+    .title { 
+      font-size: 20px;
+    }
+  }
+
+  .search-col {
+
+    align-items: center;
+
+    .row {align-items: center;}
+
+    .Search_Filter{
+      display: flex;
+      margin: 5px 0;
+
+      .dropdown {     
+          margin-right: 15px;
+          .el-select {
+              width: 100%;
+              min-width: 80px;
+              max-width: 85px;
+              .el-input__inner {
+                height: $input-height;
+                line-height: $input-height;
+              }
+              .el-input__icon {line-height: $input-height;} 
+          }   
+          .prefix {
+              margin-top: 8px;
+    
+              svg {                           
+                  width: 23px;
+              }
+          }     
+      }
+    
+      .search {
+        width: 100%;
+
+        .search-input{                  
+            border: solid 1px #E4E4E4;
+            border-radius: 3px;
+            background-color: #fff;
+            min-width: 180px;
+            height: $input-height;
+    
+            input {
+                height: 100%;
+                border: 0;
+                box-shadow: none;
+                &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                    font-size: 14px;
+                    user-select: none;
+                    color: rgb(95, 95, 95);
+                    opacity: 0.6; /* Firefox */
+                    
+                }                   
+            }
+    
+            .input-group{
+                height: 100%;
+            }
+        
+            button{
+                margin: 2px 0 2px 0;
+                background: none;
+                box-shadow: none;
+                border: 0;
+                border-radius: 0px;
+                color: #202020;
+                padding: 0 5px 0 5px;
+                border-left: solid 2px #ccc;
+                
+                &:hover{
+                border: 0;
+                box-shadow: none;
+                border-left: solid 2px #ccc;
+                }
+                &:active {
+                background-color: rgb(186, 236, 236); 
+                
+                }
+            }
+            .input-group-btn{
+                svg {
+                    vertical-align: text-top;
+                    width: 20px;
+                }
+            }
+    
+        }
+      }
+    
+    }
+
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    padding-left: 0;
+    button { 
+      margin-right: 15px; 
+      &:last-child{ margin-right: 0;}
+    }
+    .add-btn { height: $input-height;  border: none;}
+  }
+
+  .hint { color: red; font-size: 14px; margin-top: 10px;}
+
+}
+/*-------------- End Control bar ---------------*/
+
+/*------------- Pagenation --------------*/
+.veget-pagination {
+
+  user-select: none;
+
+  .b-pagination-pills .page-item .page-link {
+      border-radius: 6px !important;
+      border: none;
+  }
+
+  .page-link {      
+      font-size: 19px;
+      color: $primary-color;
+      &:focus {
+          //box-shadow: 0 0 0 0.1rem rgb(207 255 248);
+          box-shadow: none;
+      }
+  }
+
+  .page-item.active .page-link {
+      z-index: 3;
+      font-size: 19px;
+      color: #fff;
+      background-color: $veget-color;
+      border-color: $veget-color;
+  }
+
+  .pagination li:nth-child(1),
+  .pagination li:nth-last-child(1) {
+      button ,span {
+          line-height: 30px;
+          font-size: 35px;
+          padding: 0 11px 5px 11px;
+          margin: 0;
+      }
+      border-radius: 6px !important;
+      box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  }
+  .pagination li:nth-child(1) {margin-right: 2px;}
+  .pagination li:nth-last-child(1) {margin-left: 5px;}
+
+  .page-item.disabled {
+     span {
+      color: $secondary-color;
+     }
+  }
+
+}
+/*----------- End pagenation -----------*/
+
+/************ End Base-widget *************/

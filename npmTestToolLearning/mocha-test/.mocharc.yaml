@@ -1,0 +1,10 @@
+color: true
+watch-files:
+  - "src/**/*.ts"
+spec:
+  - "test/**/*.spec.ts"
+ui: "bdd"
+require: "ts-node/register"
+reporter: "spec"
+reporter-option: "tapVersion=12"
+# loader: "ts-node/esm"
